@@ -24,3 +24,31 @@ class Player(CircleShape):
         return [a, b, c]
     
     
+
+    def update(self, dt):
+        #revNum = 0
+        #for i in str(dt):
+        #    digit = dt % 10
+        #    revNum = revNum * 10 + digit
+        #    dt //= 10
+
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_w]:
+            self.move(dt)
+        if keys[pygame.K_s]:
+            self.move(-dt)
+        if keys[pygame.K_a]:
+            self.rotate(-dt)
+            #print(revNum)
+        if keys[pygame.K_d]:
+            self.rotate(dt)
+            #print(dt)
+        
+
+    def rotate(self, dt):
+        self.rotation += PLAYER_TURN_SPEED * dt
+
+    def move(self, dt):
+        forward = pygame.Vector2(0, 1).rotate(self.rotation)
+        self.position += forward * PLAYER_SPEED * dt

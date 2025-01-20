@@ -5,15 +5,15 @@ from os import environ
 environ['PYGAME_HIDE_SUPPORT_PROMPT'] = 'hide'
 import pygame
 from constants import *
-from player import *
+from player import Player
 
 def main():
     pygame.init()
     print("Starting asteroids!")
+
     clock = pygame.time.Clock()
     dt = 0
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-
     the_player = Player(SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2)
 
 
@@ -22,7 +22,9 @@ def main():
             if event.type == pygame.QUIT:
                 return
         
+        the_player.update(dt)
         screen.fill('black')
+        
         the_player.draw(screen)
         pygame.display.flip()
         dt = clock.tick(60) / 1000
